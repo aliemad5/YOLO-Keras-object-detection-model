@@ -1,4 +1,17 @@
+---
+
+## Project Details
+- **Creator:** Ali Emad Elsamanoudy 
+- **Location:** Saudi Arabia
+- **Phone** +966 59 645 2087
+- **Date:** September 2025  
+- **Description:**  
+  This project combines **YOLOv11** object detection with a **custom Keras/TensorFlow classifier**  
+  for real-time image classification through webcam input.  
+
+
 # YOLO + Keras Real-Time Classification
+
 
 This project combines **YOLO (Ultralytics)** for object detection and a custom **Keras model** for classification.  
 It uses OpenCV to process webcam frames, detect objects, crop them, classify with Keras, and display results in real-time.  
@@ -12,6 +25,7 @@ It uses OpenCV to process webcam frames, detect objects, crop them, classify wit
 
 ---
 ## Requirements
+
 
 
 # YOLO + Keras Real-Time Classification
