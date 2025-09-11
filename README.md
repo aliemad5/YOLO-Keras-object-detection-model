@@ -26,6 +26,10 @@ It uses OpenCV to process webcam frames, detect objects, crop them, classify wit
 
 ---
 ## Requirements
+Install dependencies with:
+```bash
+pip install -r requirements.txt
+```
 
 
 
