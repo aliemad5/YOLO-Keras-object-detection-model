@@ -1,32 +1,6 @@
-# YOLO-Keras-object-detection-model
-"""
-YOLO + Keras Integration for Real-Time Video Classification
+## Start webcam
 
-This script:
-1. Uses a YOLOv11n model (from Ultralytics) to detect objects in real-time.
-2. Crops detected objects and passes them to a custom Keras model for classification.
-3. Displays predictions with bounding boxes and labels on the live webcam feed.
-
-Requirements:
-- ultralytics
-- tensorflow
-- opencv-python
-- numpy
-"""
-
-from ultralytics import YOLO
-from tensorflow import keras
-import cv2
-import numpy as np
-
-
-# Load YOLO model (pre-trained weights)
-yolo_model = YOLO("yolov11n.pt")
-
-# Load custom Keras model
-keras_model = keras.models.load_model("mykeras.h5")
-
-# Start webcam
+```python
 video = cv2.VideoCapture(0)
 
 while video.isOpened():
@@ -41,7 +15,6 @@ while video.isOpened():
     boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
 
     # Process each detection
-    
     for x1, y1, x2, y2 in boxes:
         # Crop and preprocess image for Keras model
         cropped = frame[y1:y2, x1:x2]
