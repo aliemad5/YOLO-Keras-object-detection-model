@@ -56,28 +56,54 @@ while video.isOpened():
     if not ret:
         break
 
-    # Run YOLO object detection on the frame
+    # Run YOLO object detection
     results = yolo_model.predict(frame, verbose=False)
 
     # Extract bounding boxes
     boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
-    if len(boxes)>0:
-        for x1,y1,x2,y2 in boxes:
-            cropped=frame[y1:y2,x1:x2]
-            croppedrgb=cv2.cvtColor(cropped,cv2.COLOR_BGR2RGB)
-            kerasresize=cv2.resize(croppedrgb,(512,512))
-            expanded=np.expand_dims(kerasresize,axis=0)
-            keraspred=kmodel.predict(expanded)
-            kerasfinal=np.argmax(keraspred)
-            cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,0),3)
-            cv2.putText(frame,f"this is a{kerasfinal}",(x1, y1 - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
 
-        
-    
-    cv2.imshow("YOLO+keras object detection",frame)
+    # Process detections if any
+    if len(boxes) > 0:
+        for x1, y1, x2, y2 in boxes:
+            # Crop detected region
+            cropped = frame[y1:y2, x1:x2]
+
+            # Preprocess for Keras model
+            cropped_rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
+            resized = cv2.resize(cropped_rgb, (512, 512))
+            expanded = np.expand_dims(resized, axis=0)
+
+            # Run prediction with Keras model
+            prediction = kmodel.predict(expanded, verbose=0)
+            class_id = np.argmax(prediction)
+
+            # Draw bounding box and prediction
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 0), 3)
+            cv2.putText(frame,
+                        f"Class: {class_id}",
+                        (x1, y1 - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.6,
+                        (255, 0, 0),
+                        2)
+
+    # Show output frame
+    cv2.imshow("YOLO + Keras Object Detection", frame)
+
 ```
+## Show output and exit
+```python
+    # Display webcam feed with detections
+    cv2.imshow("YOLO + Keras Project", frame)
 
+    # Exit when 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+# Release resources
+video.release()
+cv2.destroyAllWindows()
+```
 
     
 
