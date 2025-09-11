@@ -34,7 +34,7 @@ import numpy as np
 yolo_model = YOLO("yolov11n.pt")
 ```
 
-## load custom model
+## Load custom model
 
 This project uses a pre-trained Keras model saved as **`mykeras.h5`**.  
 The full training code, data preprocessing, and experiments for this model are explained in another repository:   [Custom Keras Model Repo](https://github.com/YOUR-USERNAME/keras-model-repo) 
@@ -44,10 +44,40 @@ keras_model = keras.models.load_model("mykeras.h5")
 
 
 # Open Webcam 
+```python
 video = cv2.VideoCapture(0)
+```
+
+## Main loop
+```python
+while video.isOpened():
+    # Capture frame from webcam
+    ret, frame = video.read()
+    if not ret:
+        break
+
+    # Run YOLO object detection on the frame
+    results = yolo_model.predict(frame, verbose=False)
+
+    # Extract bounding boxes
+    boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
+    if len(boxes)>0:
+        for x1,y1,x2,y2 in boxes:
+            cropped=frame[y1:y2,x1:x2]
+            croppedrgb=cv2.cvtColor(cropped,cv2.COLOR_BGR2RGB)
+            kerasresize=cv2.resize(croppedrgb,(512,512))
+            expanded=np.expand_dims(kerasresize,axis=0)
+            keraspred=kmodel.predict(expanded)
+            kerasfinal=np.argmax(keraspred)
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,0),3)
+            cv2.putText(frame,f"this is a{kerasfinal}",(x1, y1 - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
+
+        
+    
+    cv2.imshow("YOLO+keras object detection",frame)
+```
 
 
-
-
-
+    
 
