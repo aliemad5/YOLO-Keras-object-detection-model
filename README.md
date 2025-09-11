@@ -17,7 +17,9 @@ Install dependencies with:
 ```bash
 pip install -r requirements.txt
 
-## Imports
+---
+
+
 ```python
 from ultralytics import YOLO       # YOLO object detection
 from tensorflow import keras       # Keras deep learning framework
