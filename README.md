@@ -22,11 +22,12 @@ It uses OpenCV to process webcam frames, detect objects, crop them, classify wit
 ---
 
 ## Imports
-``python
+```python
 from ultralytics import YOLO
 from tensorflow import keras
 import cv2
-import numpy as np```
+import numpy as np
+```
 
 ## Load models
 
