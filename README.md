@@ -11,17 +11,26 @@ It uses OpenCV to process webcam frames, detect objects, crop them, classify wit
 - Shows bounding boxes and predicted labels on the live webcam feed  
 
 ---
-
 ## Requirements
-Install dependencies with:
-```bash
-pip install -r requirements.txt
+
+
+# YOLO + Keras Real-Time Classification
+
+This project combines **YOLO (Ultralytics)** for object detection and a custom **Keras/TensorFlow model** for classification.  
+It uses OpenCV to process webcam frames, detect objects, crop them, classify with Keras, and display results in real-time.  
 
 ---
 
+## Imports
+``python
+from ultralytics import YOLO
+from tensorflow import keras
+import cv2
+import numpy as np```
 
-```python
-from ultralytics import YOLO       # YOLO object detection
-from tensorflow import keras       # Keras deep learning framework
-import cv2                         # OpenCV for computer vision
-import numpy as np                 # NumPy for array operations
+## Load models
+
+
+
+
+
