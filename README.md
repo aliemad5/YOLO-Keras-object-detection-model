@@ -41,6 +41,7 @@ while video.isOpened():
     boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
 
     # Process each detection
+    
     for x1, y1, x2, y2 in boxes:
         # Crop and preprocess image for Keras model
         cropped = frame[y1:y2, x1:x2]
