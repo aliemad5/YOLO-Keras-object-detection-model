@@ -1,5 +1,4 @@
 
-
 ## Project Details
 
 - **Creator:** Ali Emad Elsamanoudy 
