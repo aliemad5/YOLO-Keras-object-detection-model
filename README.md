@@ -15,8 +15,9 @@ import cv2
 import numpy as np
 ```
 ## Load YOLO model
-python
+```python
 yolo_model = YOLO("yolov11n.pt")
+```
 ## Load custom model
 This project uses a pre-trained Keras model saved as **mykeras.h5**. The full training code, data preprocessing, and experiments for this model are explained in another repository: [Custom Keras Model Repo](https://github.com/YOUR-USERNAME/keras-model-repo)
 ```python
