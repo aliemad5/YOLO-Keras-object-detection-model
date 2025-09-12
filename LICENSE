@@ -1,26 +1,21 @@
-MIT License
+Custom License — Showcase Only
 
 Copyright (c) 2025 Ali Emad Elsamanoudy™
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights 
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-copies of the Software, and to permit persons to whom the Software is 
-furnished to do so, subject to the following conditions:
+Permission is hereby granted to any person obtaining a copy of this software
+to view, run, and test the software for personal, educational, or evaluation
+purposes only.
 
-1. **Attribution Required**  
-   You must give clear credit to the original author  
-   (Ali Emad Elsamanoudy™) in any copy, derivative, or distribution of this work.  
+Restrictions:
+1. This software may NOT be used in any commercial product, project, or service
+   without the explicit written permission or employment of the author
+   (Ali Emad Elsamanoudy™).
+2. This software may NOT be redistributed, sublicensed, or incorporated into
+   other codebases without permission.
+3. Attribution is required in all permitted uses.
 
-2. **Legal Enforcement**  
-   Failure to provide credit constitutes a breach of this license agreement.  
-   The author reserves the right to take legal action for violations, including
-   but not limited to seeking damages and injunctions.  
+Enforcement:
+Failure to comply with these terms will be considered a violation of copyright
+and license conditions, and the author reserves the right to pursue legal action.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
