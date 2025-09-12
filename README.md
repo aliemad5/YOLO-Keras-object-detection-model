@@ -1,9 +1,9 @@
-"""
+
 Train a custom CNN classifier with Keras/TensorFlow.
 Dataset: images stored in folder structure -> imgpaths.csv + ylabels.csv
 Author: Ali Emad Elsamanoudy
 Date: September 2025
-"""
+
 ## imports
 ```python
 import tensorflow as tf
