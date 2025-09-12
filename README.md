@@ -8,7 +8,6 @@ Date: September 2025
 
 ## Imports
 ```python
-
 from ultralytics import YOLO
 from tensorflow import keras
 import cv2
@@ -29,31 +28,26 @@ video = cv2.VideoCapture(0)
 ```
 ## Main loop
 ```python
-while video.isOpened():
+while video.isOpened(): 
     ret, frame = video.read()
     if not ret:
         break
 
-    
     results = yolo_model.predict(frame, verbose=False)
-
-    
     boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
 
     if len(boxes) > 0:
         for x1, y1, x2, y2 in boxes:
-            # Crop detected region
             cropped = frame[y1:y2, x1:x2]
+            if cropped.size == 0:  # prevent errors if crop is empty
+                continue
 
             cropped_rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
             resized = cv2.resize(cropped_rgb, (512, 512))
-            expanded = np.expand_dims(resized, axis=0)
-
-            
-            prediction = kmodel.predict(expanded, verbose=0)
+            expanded = np.expand_dims(resized, axis=0) / 255.0  # normalize
+            prediction = keras_model.predict(expanded, verbose=0)
             class_id = np.argmax(prediction)
 
-            n
             cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 0), 3)
             cv2.putText(frame,
                         f"Class: {class_id}",
