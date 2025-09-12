@@ -9,83 +9,72 @@ Date: September 2025
 
 ## Imports
 ```python
-import tensorflow as tf
-from keras.layers import Dense, Flatten, MaxPooling2D, Conv2D
-from keras.models import Sequential
-from keras.losses import SparseCategoricalCrossentropy
-from keras.preprocessing import image
-import pandas as pd
+python
+from ultralytics import YOLO
+from tensorflow import keras
+import cv2
 import numpy as np
 ```
-# ============================
-# Load Dataset
-# ============================
+## Load yolo model
+python
+yolo_model = YOLO("yolov11n.pt")
+## Load custom model This project uses a pre-trained Keras model saved as **mykeras.h5**. The full training code, data preprocessing, and experiments for this model are explained in another repository: [Custom Keras Model Repo](https://github.com/YOUR-USERNAME/keras-model-repo)
 ```python
-print("[INFO] Loading dataset from CSVs...")
-
-y_train = pd.read_csv("ylabels.csv")       
-x_images = pd.read_csv("imgpaths.csv")     
-
-x_train = []
-for img_path in x_images["path"]:
-    img = image.load_img(img_path, target_size=(512, 512))
-    img = image.img_to_array(img) / 255.0
-    x_train.append(img)
-
-x_train = np.array(x_train)
-y_train = np.array(y_train).squeeze()
-
-print(f"[INFO] Dataset loaded: {x_train.shape[0]} images, {len(np.unique(y_train))} classes")
+keras_model = keras.models.load_model("mykeras.h5")
 ```
-# ============================
-# Build Model
-# ============================
-```python
-model = Sequential([
-    Conv2D(32, (5, 5), padding="same", activation="relu", input_shape=(512, 512, 3)),
-    MaxPooling2D(pool_size=(2, 2)),
+# Open Webcam
+python
+video = cv2.VideoCapture(0)
+## Main loop
+python
+while video.isOpened():
+    # Capture frame from webcam
+    ret, frame = video.read()
+    if not ret:
+        break
 
-    Conv2D(64, (4, 4), padding="same", activation="relu"),
-    MaxPooling2D(pool_size=(2, 2)),
+    # Run YOLO object detection
+    results = yolo_model.predict(frame, verbose=False)
 
-    Flatten(),
-    Dense(128, activation="relu"),
-    Dense(50, activation="softmax")   
-])
+    # Extract bounding boxes
+    boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
 
-model.compile(optimizer="adam",
-              loss=SparseCategoricalCrossentropy(),
-              metrics=["accuracy"])
+    # Process detections if any
+    if len(boxes) > 0:
+        for x1, y1, x2, y2 in boxes:
+            # Crop detected region
+            cropped = frame[y1:y2, x1:x2]
 
-print("[INFO] Model compiled.")
-```
-# ============================
-# Train
-# ============================
-```python
-print("[INFO] Starting training...")
-history = model.fit(
-    x_train, y_train,
-    batch_size=64,
-    epochs=20,
-    validation_split=0.2
-)
-```
-# ============================
-# Save Model
-# ============================
-```python
-model.save("mykeras.h5")
-print("[INFO] Model saved as mykeras.h5")
-```
-# ============================
-# Save Class Mapping
-# ============================
-```python
-classes = sorted(np.unique(y_train))
-with open("class_mapping.txt", "w") as f:
-    for idx, cls in enumerate(classes):
-        f.write(f"{idx}: class_{cls}\n")
+            # Preprocess for Keras model
+            cropped_rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
+            resized = cv2.resize(cropped_rgb, (512, 512))
+            expanded = np.expand_dims(resized, axis=0)
 
-print("[INFO] class_mapping.txt created")
-```
+            # Run prediction with Keras model
+            prediction = kmodel.predict(expanded, verbose=0)
+            class_id = np.argmax(prediction)
+
+            # Draw bounding box and prediction
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 0), 3)
+            cv2.putText(frame,
+                        f"Class: {class_id}",
+                        (x1, y1 - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.6,
+                        (255, 0, 0),
+                        2)
+
+    # Show output frame
+    cv2.imshow("YOLO + Keras Object Detection", frame)
+## Show output and exit
+python
+    # Display webcam feed with detections
+    cv2.imshow("YOLO + Keras Project", frame)
+
+    # Exit when 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+
+# Release resources
+video.release()
+cv2.destroyAllWindows()
