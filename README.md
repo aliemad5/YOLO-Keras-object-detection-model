@@ -1,7 +1,9 @@
 
 Author: Ali Emad Elsamanoudy
+Email:
 
-Date: September  2025
+## License
+[MIT License](./LICENSE) — **CREDIT REQUIRED. DO NOT IGNORE.**
 
 ## Requirements
 All dependencies for this project are listed in [Requirements.txt](Requirements.txt).
