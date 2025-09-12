@@ -8,7 +8,7 @@ Date: September 2025
 
 ## Imports
 ```python
-python
+
 from ultralytics import YOLO
 from tensorflow import keras
 import cv2
@@ -23,8 +23,9 @@ This project uses a pre-trained Keras model saved as **mykeras.h5**. The full tr
 keras_model = keras.models.load_model("mykeras.h5")
 ```
 # Open Webcam
-python
+```python
 video = cv2.VideoCapture(0)
+```
 ## Main loop
 ```python
 while video.isOpened():
