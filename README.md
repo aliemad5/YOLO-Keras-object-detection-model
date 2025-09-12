@@ -26,35 +26,32 @@ keras_model = keras.models.load_model("mykeras.h5")
 python
 video = cv2.VideoCapture(0)
 ## Main loop
-python
+```python
 while video.isOpened():
-    # Capture frame from webcam
     ret, frame = video.read()
     if not ret:
         break
 
-    # Run YOLO object detection
+    
     results = yolo_model.predict(frame, verbose=False)
 
-    # Extract bounding boxes
+    
     boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
 
-    # Process detections if any
     if len(boxes) > 0:
         for x1, y1, x2, y2 in boxes:
             # Crop detected region
             cropped = frame[y1:y2, x1:x2]
 
-            # Preprocess for Keras model
             cropped_rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
             resized = cv2.resize(cropped_rgb, (512, 512))
             expanded = np.expand_dims(resized, axis=0)
 
-            # Run prediction with Keras model
+            
             prediction = kmodel.predict(expanded, verbose=0)
             class_id = np.argmax(prediction)
 
-            # Draw bounding box and prediction
+            n
             cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 0), 3)
             cv2.putText(frame,
                         f"Class: {class_id}",
@@ -64,17 +61,16 @@ while video.isOpened():
                         (255, 0, 0),
                         2)
 
-    # Show output frame
-    cv2.imshow("YOLO + Keras Object Detection", frame)
+```
 ## Show output and exit
-python
-    # Display webcam feed with detections
+```python
     cv2.imshow("YOLO + Keras Project", frame)
 
-    # Exit when 'q' is pressed
+   
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
-# Release resources
+
 video.release()
 cv2.destroyAllWindows()
+```
