@@ -4,7 +4,7 @@ Author: Ali Emad Elsamanoudy
 Date: September  2025
 
 ## Requirements
-All dependencies for this project are listed in Requirements.txt
+All dependencies for this project are listed in [Requirements.txt](Requirements.txt).
 To install them, run the following command in your terminal:
 ```bash
 pip install -r Requirements.txt
