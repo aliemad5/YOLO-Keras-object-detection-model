@@ -1,7 +1,7 @@
 
 Author: Ali Emad Elsamanoudy
 
-Email:ali.elsamanoud1212y@gmail.com
+Email:ali.elsamanoud623@gmail.com
 
 ## License
 Copyright (c) 2025 Ali Emad Elsamanoudy
