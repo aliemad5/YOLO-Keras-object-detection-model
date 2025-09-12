@@ -5,6 +5,7 @@ Email:
 
 ## License
 Copyright (c) 2025 Ali Emad Elsamanoudy
+
 [MIT License](./LICENSE) — **CREDIT REQUIRED. DO NOT IGNORE.**
 
 ## Requirements
