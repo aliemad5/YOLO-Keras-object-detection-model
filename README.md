@@ -1,9 +1,14 @@
 
-
 Author: Ali Emad Elsamanoudy
 
 Date: September  2025
 
+## Requirements
+All dependencies for this project are listed in requirements.txt
+To install them, run the following command in your terminal:
+```bash
+pip install -r requirements.txt
+```
 ## Imports
 ```python
 from ultralytics import YOLO
