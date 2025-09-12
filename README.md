@@ -1,10 +1,13 @@
 
 Train a custom CNN classifier with Keras/TensorFlow.
+
 Dataset: images stored in folder structure -> imgpaths.csv + ylabels.csv
+
 Author: Ali Emad Elsamanoudy
+
 Date: September 2025
 
-## imports
+## Imports
 ```python
 import tensorflow as tf
 from keras.layers import Dense, Flatten, MaxPooling2D, Conv2D
