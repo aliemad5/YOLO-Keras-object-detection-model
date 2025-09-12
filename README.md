@@ -1,9 +1,8 @@
 
-Train a custom CNN classifier with Keras/TensorFlow.
 
-Dataset: images stored in folder structure -> imgpaths.csv + ylabels.csv
 
 Author: Ali Emad Elsamanoudy
+
 
 Date: September 2025
 
@@ -15,10 +14,11 @@ from tensorflow import keras
 import cv2
 import numpy as np
 ```
-## Load yolo model
+## Load YOLO model
 python
 yolo_model = YOLO("yolov11n.pt")
-## Load custom model This project uses a pre-trained Keras model saved as **mykeras.h5**. The full training code, data preprocessing, and experiments for this model are explained in another repository: [Custom Keras Model Repo](https://github.com/YOUR-USERNAME/keras-model-repo)
+## Load custom model
+This project uses a pre-trained Keras model saved as **mykeras.h5**. The full training code, data preprocessing, and experiments for this model are explained in another repository: [Custom Keras Model Repo](https://github.com/YOUR-USERNAME/keras-model-repo)
 ```python
 keras_model = keras.models.load_model("mykeras.h5")
 ```
