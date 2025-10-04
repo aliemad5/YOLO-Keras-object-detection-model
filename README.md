@@ -8,12 +8,18 @@ Copyright (c) 2025 Ali Emad Elsamanoudy
 
 [MIT License](./LICENSE) — **CREDIT REQUIRED. DO NOT IGNORE.**
 
+## What you can do
+
+
 ## Requirements
-All dependencies for this project are listed in [Requirements.txt](Requirements.txt).
-To install them, run the following command in your terminal:
-```bash
-pip install -r Requirements.txt
-```
+- Have Google Drive App
+- Have The Keras training model [Custom Keras Model Repo](https://github.com/aliemad5/Keras-custom-image-deep-learning-code)
+- Have Pycharm or VScode
+- Have a working Webcam
+
+## Instructions
+
+
 ## Imports
 ```python
 from ultralytics import YOLO
@@ -51,7 +57,7 @@ while video.isOpened():
                 continue
 
             cropped_rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
-            resized = cv2.resize(cropped_rgb, (512, 512))
+            resized = cv2.resize(cropped_rgb, (300, 300))
             expanded = np.expand_dims(resized, axis=0) / 255.0  # normalize
             prediction = keras_model.predict(expanded, verbose=0)
             class_id = np.argmax(prediction)
