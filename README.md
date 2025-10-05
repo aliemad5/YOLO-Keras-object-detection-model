@@ -53,7 +53,7 @@ while video.isOpened():
     if len(boxes) > 0:
         for x1, y1, x2, y2 in boxes:
             cropped = frame[y1:y2, x1:x2]
-            if cropped.size == 0:  # prevent errors if crop is empty
+            if cropped.size == 0: 
                 continue
 
             cropped_rgb = cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB)
